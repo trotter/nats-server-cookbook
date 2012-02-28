@@ -1,0 +1,9 @@
+Bluepill.application("nats-server") do |app|
+  app.process("nats-server") do |process|
+    process.start_command      = "<%= @binary %> -T -d -c <%= @config_file %>"
+    process.pid_file           = "<%= @pid_file %>"
+    process.start_grace_time   = 15.seconds
+    process.stop_grace_time    = 15.seconds
+    process.restart_grace_time = 15.seconds
+  end
+end
