@@ -16,14 +16,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-class Chef::Recipe
-  include Chef::Mixin::Rbenv
-end
-
-include_recipe "cloudfoundry_common::ruby_1_9_2"
+include_recipe "cloudfoundry-common::ruby_1_9_2"
 include_recipe "bluepill"
 
-gem_binaries_path = File.join(rbenv_prefix_for(node.cloudfoundry_common.ruby_1_9_2_version), "bin")
+gem_binaries_path = File.join(rbenv_root, "versions", node.cloudfoundry_common.ruby_1_9_2_version, "bin")
 nats_config = File.join(node.nats_server.config_dir, "config.yml")
 
 rbenv_gem "nats" do
