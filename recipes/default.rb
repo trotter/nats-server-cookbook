@@ -17,7 +17,6 @@
 # limitations under the License.
 #
 include_recipe "cloudfoundry-common"
-include_recipe "cloudfoundry-common::ruby_1_9_2"
 include_recipe "bluepill"
 
 gem_binaries_path = File.join(rbenv_root, "versions", node.cloudfoundry_common.ruby_1_9_2_version, "bin")
