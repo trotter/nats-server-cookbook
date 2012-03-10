@@ -1,6 +1,5 @@
 include_attribute "cloudfoundry-common"
 
-default[:nats_server][:config_dir] = "/etc/nats"
 default[:nats_server][:host]       = "0.0.0.0"
 default[:nats_server][:port]       = "4222"
 default[:nats_server][:user]       = "nats"

@@ -20,7 +20,7 @@ include_recipe "cloudfoundry-common"
 include_recipe "bluepill"
 
 gem_binaries_path = File.join(rbenv_root, "versions", node.cloudfoundry_common.ruby_1_9_2_version, "bin")
-nats_config = File.join(node.nats_server.config_dir, "config.yml")
+nats_config = File.join(node.cloudfoundry_common.config_dir, "config.yml")
 
 rbenv_gem "nats" do
   ruby_version node.cloudfoundry_common.ruby_1_9_2_version
