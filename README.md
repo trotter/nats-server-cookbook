@@ -33,6 +33,13 @@ common config directories.
 Attributes
 ==========
 
+* `nats_server[:host]` - Nats will bind to this host. Default is `0.0.0.0"`.
+* `nats_server[:port]` - Nats will bind to this port. Default is `4222"`.
+* `nats_server[:user]` - Clients will connect to nats as this user. Default is `nats"`.
+* `nats_server[:password]` - Clients will connect to nats with this password. Default is `nats"`.
+* `nats_server[:pid_file]` - Where to write Nats's pid. Default is `File.join(node[:cloudfoundry_common][:pid_dir], "nats-server.pid")`.
+* `nats_server[:log_file]` - Where to write Nats's logs. Default is `File.join(node[:cloudfoundry_common][:log_dir], "nats-server.log")`.
+
 License and Author
 ==================
 
