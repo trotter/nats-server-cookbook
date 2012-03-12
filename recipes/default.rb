@@ -26,11 +26,6 @@ rbenv_gem "nats" do
   ruby_version node.cloudfoundry_common.ruby_1_9_2_version
 end
 
-directory node.nats_server.config_dir do
-  owner node.cloudfoundry_common.user
-  mode  "0755"
-end
-
 template nats_config do
   source "config.yml.erb"
   owner node.cloudfoundry_common.user
