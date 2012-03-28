@@ -4,7 +4,7 @@ include_attribute "cloudfoundry-common"
 default[:nats_server][:host]       = "0.0.0.0"
 
 # Nats will bind to this port.
-default[:nats_server][:port]       = "4222"
+default[:nats_server][:port]       = default[:cloudfoundry_common][:nats_server][:port]
 
 # Clients will connect to nats as this user.
 default[:nats_server][:user]       = "nats"
