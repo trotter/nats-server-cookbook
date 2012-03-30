@@ -16,35 +16,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-include_recipe "cloudfoundry-common"
-include_recipe "bluepill"
 
-ruby_path    = File.join(rbenv_root, "versions", node.cloudfoundry_common.ruby_1_9_2_version, "bin")
 gem_binaries_path = File.join(rbenv_root, "versions", node.cloudfoundry_common.ruby_1_9_2_version, "bin")
-nats_config = File.join(node.cloudfoundry_common.config_dir, "nats.yml")
 
 rbenv_gem "nats" do
   ruby_version node.cloudfoundry_common.ruby_1_9_2_version
 end
 
-template nats_config do
-  source "config.yml.erb"
-  owner node.cloudfoundry_common.user
-  mode "0644"
-  notifies :restart, "bluepill_service[nats-server]"
+cloudfoundry_component "nats-server" do
+  component_name "nats-server"
+  pid_file     node.nats_server.pid_file
+  log_file     node.nats_server.log_file
+  binary       File.join(gem_binaries_path, "nats-server")
 end
-
-template File.join(node.bluepill.conf_dir, "nats-server.pill") do
-  source "nats-server.pill.erb"
-  variables(
-    :binary      => File.join(gem_binaries_path, "nats-server"),
-    :path        => ruby_path,
-    :pid_file    => node.nats_server.pid_file,
-    :config_file => nats_config
-  )
-end
-
-bluepill_service "nats-server" do
-  action [:enable, :load, :start]
-end
-
